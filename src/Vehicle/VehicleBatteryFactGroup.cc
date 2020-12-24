@@ -26,7 +26,7 @@ const char* VehicleBatteryFactGroup::_timeRemainingFactName         = "timeRemai
 const char* VehicleBatteryFactGroup::_timeRemainingStrFactName      = "timeRemainingStr";
 const char* VehicleBatteryFactGroup::_chargeStateFactName           = "chargeState";
 
-const char* VehicleBatteryFactGroup::_settingsGroup =                       "Vehicle.battery";
+const char* VehicleBatteryFactGroup::_settingsGroup                 = "Vehicle.battery";
 
 VehicleBatteryFactGroup::VehicleBatteryFactGroup(uint8_t batteryId, QObject* parent)
     : FactGroup             (1000, ":/json/Vehicle/BatteryFact.json", parent)
