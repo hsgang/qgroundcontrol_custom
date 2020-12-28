@@ -32,44 +32,86 @@ Item {
         id: gpsInfo
 
         Rectangle {
-            width:  gpsCol.width   + ScreenTools.defaultFontPixelWidth  * 3
-            height: gpsCol.height  + ScreenTools.defaultFontPixelHeight * 2
+            id:     gpsInfoRectangle
+            width:  gpsCol.width * 2 + gpsCol.anchors.margins * 3
+            height: gpsCol.height  + ScreenTools.defaultFontPixelHeight * 1
             radius: ScreenTools.defaultFontPixelHeight * 0.5
             color:  qgcPal.window
             border.color:   qgcPal.text
 
-            Column {
-                id:                 gpsCol
-                spacing:            ScreenTools.defaultFontPixelHeight * 0.5
-                width:              Math.max(gpsGrid.width, gpsLabel.width)
-                anchors.margins:    ScreenTools.defaultFontPixelHeight
-                anchors.centerIn:   parent
+            Row{
+                spacing:            ScreenTools.defaultFontPixelHeight
+                anchors.margins:    ScreenTools.defaultFontPixelWidth
+                anchors.top:        parent.top
+                anchors.centerIn: gpsInfoRectangle.Center
 
-                QGCLabel {
-                    id:             gpsLabel
-                    text:           (_activeVehicle && _activeVehicle.gps.count.value >= 0) ? qsTr("GPS Status") : qsTr("GPS Data Unavailable")
-                    font.family:    ScreenTools.demiboldFontFamily
-                    anchors.horizontalCenter: parent.horizontalCenter
-                }
-
-                GridLayout {
-                    id:                 gpsGrid
-                    visible:            (_activeVehicle && _activeVehicle.gps.count.value >= 0)
+                Column {
+                    id:                 gpsCol
+                    //spacing:            ScreenTools.defaultFontPixelHeight * 0.5
+                    width:              Math.max(gpsGrid.width, gpsLabel.width)
                     anchors.margins:    ScreenTools.defaultFontPixelHeight
-                    columnSpacing:      ScreenTools.defaultFontPixelWidth
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    columns: 2
+                    anchors.left:       parent.left
 
-                    QGCLabel { text: qsTr("GPS Count:") }
-                    QGCLabel { text: _activeVehicle ? _activeVehicle.gps.count.valueString : qsTr("N/A", "No data to display") }
-                    QGCLabel { text: qsTr("GPS Lock:") }
-                    QGCLabel { text: _activeVehicle ? _activeVehicle.gps.lock.enumStringValue : qsTr("N/A", "No data to display") }
-                    QGCLabel { text: qsTr("HDOP:") }
-                    QGCLabel { text: _activeVehicle ? _activeVehicle.gps.hdop.valueString : qsTr("--.--", "No data to display") }
-                    QGCLabel { text: qsTr("VDOP:") }
-                    QGCLabel { text: _activeVehicle ? _activeVehicle.gps.vdop.valueString : qsTr("--.--", "No data to display") }
-                    QGCLabel { text: qsTr("Course Over Ground:") }
-                    QGCLabel { text: _activeVehicle ? _activeVehicle.gps.courseOverGround.valueString : qsTr("--.--", "No data to display") }
+                    QGCLabel {
+                        id:             gpsLabel
+                        text:           (_activeVehicle && _activeVehicle.gps.count.value >= 0) ? qsTr("GPS Status") : qsTr("GPS Data Unavailable")
+                        font.family:    ScreenTools.demiboldFontFamily
+                        anchors.horizontalCenter: parent.horizontalCenter
+                    }
+
+                    GridLayout {
+                        id:                 gpsGrid
+                        visible:            (_activeVehicle && _activeVehicle.gps.count.value >= 0)
+                        anchors.margins:    ScreenTools.defaultFontPixelHeight
+                        columnSpacing:      ScreenTools.defaultFontPixelWidth
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        columns: 2
+
+                        QGCLabel { text: qsTr("GPS Count:") }
+                        QGCLabel { text: _activeVehicle ? _activeVehicle.gps.count.valueString : qsTr("N/A", "No data to display") }
+                        QGCLabel { text: qsTr("GPS Lock:") }
+                        QGCLabel { text: _activeVehicle ? _activeVehicle.gps.lock.enumStringValue : qsTr("N/A", "No data to display") }
+                        QGCLabel { text: qsTr("HDOP:") }
+                        QGCLabel { text: _activeVehicle ? _activeVehicle.gps.hdop.valueString : qsTr("--.--", "No data to display") }
+                        QGCLabel { text: qsTr("VDOP:") }
+                        QGCLabel { text: _activeVehicle ? _activeVehicle.gps.vdop.valueString : qsTr("--.--", "No data to display") }
+                        QGCLabel { text: qsTr("Course Over Ground:") }
+                        QGCLabel { text: _activeVehicle ? _activeVehicle.gps.courseOverGround.valueString : qsTr("--.--", "No data to display") }
+                    }
+                }
+                Column{
+                    id:                 gps2Col
+                    //spacing:            ScreenTools.defaultFontPixelHeight * 0.5
+                    width:              Math.max(gps2Grid.width, gps2Label.width)
+                    anchors.margins:    ScreenTools.defaultFontPixelHeight
+                    anchors.left:       gpsCol.right
+
+                    QGCLabel {
+                        id:             gps2Label
+                        text:           (_activeVehicle && _activeVehicle.gps2.countGps2.value >= 0) ? qsTr("GPS2 Status") : qsTr("GPS Data Unavailable")
+                        font.family:    ScreenTools.demiboldFontFamily
+                        anchors.horizontalCenter: parent.horizontalCenter
+                    }
+
+                    GridLayout {
+                        id:                 gps2Grid
+                        visible:            (_activeVehicle && _activeVehicle.gps2.countGps2.value >= 0)
+                        anchors.margins:    ScreenTools.defaultFontPixelHeight
+                        columnSpacing:      ScreenTools.defaultFontPixelWidth
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        columns: 2
+
+                        QGCLabel { text: qsTr("GPS Count:") }
+                        QGCLabel { text: _activeVehicle ? _activeVehicle.gps2.countGps2.valueString : qsTr("N/A", "No data to display") }
+                        QGCLabel { text: qsTr("GPS Lock:") }
+                        QGCLabel { text: _activeVehicle ? _activeVehicle.gps2.lockGps2.enumStringValue : qsTr("N/A", "No data to display") }
+                        QGCLabel { text: qsTr("HDOP:") }
+                        QGCLabel { text: _activeVehicle ? _activeVehicle.gps2.hdopGps2.valueString : qsTr("--.--", "No data to display") }
+                        QGCLabel { text: qsTr("VDOP:") }
+                        QGCLabel { text: _activeVehicle ? _activeVehicle.gps2.vdopGps2.valueString : qsTr("--.--", "No data to display") }
+                        QGCLabel { text: qsTr("Course Over Ground:") }
+                        QGCLabel { text: _activeVehicle ? _activeVehicle.gps2.courseOverGroundGps2.valueString : qsTr("--.--", "No data to display") }
+                    }
                 }
             }
         }
